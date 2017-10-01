@@ -1,11 +1,9 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import Article from './Article'
+import Accordion from '../decorators/accordionInheritance'
 
-class ArticleList extends Component {
-    state = {
-        openArticleId: null
-    }
+class ArticleList extends Accordion {
 
     render() {
         const {articles} = this.props
@@ -22,21 +20,6 @@ class ArticleList extends Component {
             </ul>
         )
     }
-
-    toggleArticle = (openArticleId) => {
-        if (this.memoized.get(openArticleId)) return this.memoized.get(openArticleId)
-        const func = (ev) => {
-            this.setState({
-                openArticleId: this.state.openArticleId === openArticleId ? null : openArticleId
-            })
-        }
-
-        this.memoized.set(openArticleId, func)
-
-        return func
-    }
-
-    memoized = new Map()
 }
 
 
